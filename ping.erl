@@ -4,9 +4,12 @@
 ping() ->
 	receive
 		0 ->
-			ping();
+			pong ! kill;
+			stop();
+		kill ->
+			stop();
 		Number ->
-			io:format("ping ~w~n", [Number]),
+			%io:format("ping ~w~n", [Number]),
 			pong ! Number-1,
 			ping()
 		after
@@ -16,9 +19,12 @@ ping() ->
 pong() ->
 	receive
 		0 ->
-			pong();
+			ping ! kill;
+			stop();
+		kill ->
+			stop();
 		Number ->
-			io:format("pong ~w~n", [Number]),
+			%io:format("pong ~w~n", [Number]),
 			ping ! Number-1,
 			pong()
 		after
