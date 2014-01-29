@@ -4,12 +4,13 @@
 ping() ->
 	receive
 		0 ->
-			pong ! kill;
+			pong ! kill,
 			stop();
 		kill ->
 			stop();
 		Number ->
 			%io:format("ping ~w~n", [Number]),
+			timer:sleep(500),
 			pong ! Number-1,
 			ping()
 		after
@@ -19,12 +20,13 @@ ping() ->
 pong() ->
 	receive
 		0 ->
-			ping ! kill;
+			ping ! kill,
 			stop();
 		kill ->
 			stop();
 		Number ->
 			%io:format("pong ~w~n", [Number]),
+			timer:sleep(500),
 			ping ! Number-1,
 			pong()
 		after
