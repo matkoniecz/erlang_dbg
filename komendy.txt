@@ -1,0 +1,19 @@
+dbg:tracer().
+ping:start().
+dbg:p(ping, [all]).
+ping:play(11).
+
+
+ping:start().
+dbg:p(ping, [m]).
+ping:play(11).
+
+
+
+dbg:stop_clear().
+
+
+
+
+%powoduje zablokowanie się shella
+dbg:p(all, [all]).
